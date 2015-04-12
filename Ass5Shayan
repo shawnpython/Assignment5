@@ -1,6 +1,6 @@
 import random
 matrix=[]
- 
+print "testing github"
 #Validation of dim
  
 dim=raw_input("Choose a size for the board between 3 and 6, inclusive.")
