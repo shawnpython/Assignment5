@@ -1,0 +1,114 @@
+import random
+matrix=[]
+ 
+#Validation of dim
+ 
+dim=raw_input("Choose a size for the board between 3 and 6, inclusive.")
+dimNum = "3456"
+while dim not in dimNum:
+        dim=raw_input("Please re-insert a value between 3 and 6 ")
+ 
+creation_of_board=raw_input("Creation of board? (r-random,u-user) :")
+dim=int(dim)
+ 
+def intro():
+    print "Welcome to my Diamond Treasure Hunter game! Hope you get lots of treasure!"
+    return
+ 
+def RandomOrUserGenerated(creation_of_board):
+        if creation_of_board=="r":
+                maxdiam=raw_input("please type a number between 1 and 10, which represent the # of diamonds within the matrix")
+                maxdiam=int(maxdiam)
+                the_matrix_board(dim,maxdiam)
+               
+        elif creation_of_board=="u":
+                list_of_lists=input("Provide a list of lists, same number of rows and columns wth integer numbers between 0 and 10 inclusive and maybe -1 ")
+                print "The board is: "
+                print "------------"
+                for i in range(dim):
+                        print " Col",i,
+                for i in range(dim):
+                        print "Row",i,
+                        for j in range(dim):
+                                print "  ",list_of_lists[i][j]," ",
+                        print ;\
+               
+                return
+ 
+ 
+def RandomlyPlacedNegOne(matrix):
+        is_diamond = random.random()<.8
+        if is_diamond:
+                x=(random.randint(0,dim-1))
+                y=(random.randint(0,dim-1))
+                matrix[x][y] = -1
+        return
+ 
+def the_matrix_board(dim,maxdiam):
+    print "The board is"
+    print "------------"
+    #Putting random generated values into the matrix
+    for i in range(dim):
+        row=[]
+        for c in range(dim):
+            row.append(random.randint(0,maxdiam))
+        matrix.append(row)
+    #Displaying the matrix
+    print "   ",
+    for i in range(dim):
+        print " Col",i,
+    print "  "
+    for i in range(dim):
+        print "Row",i,
+        for j in range(dim):
+                print "  ",matrix[i][j]," ",
+        print ;\
+    return
+ 
+def diamondcollection(x,y):
+        count=0
+        while matrix[x][y]!=-1:
+                if matrix[x][y]%2==0:
+                        count=count+(matrix[x][y])/2
+                        matrix[x][y]=matrix[x][y]-(matrix[x][y])/2
+                else:
+                        count=count+matrix[x][y]
+                        matrix[x][y]=0
+                       
+        return count
+def board_moves(matrix):
+        count=0
+        print "How would you like to travel?"
+        print "r = row"
+        print "c = column"
+        print "m = main diagonal"
+        user_move = raw_input("s = secondary diagonal        : ")
+        user_range = "rcms"
+        while user_move not in user_range:
+                user_move = raw_input("please enter a valid letter: ")
+               
+        if user_move == r:
+                row_move = raw_input("select a row to travel: ")
+                x=int(row_move)
+                for y in range(dim):
+                        diamondcollection(x,y)
+                        print matrix[x][y]
+                print matrix
+                       
+                rowlocation=matrix[row_move]
+               
+        if user_move == c:
+                column_move = raw_input("select a column to travel: ")
+        return
+ 
+def play_again(answer):
+    answer=raw_input("Would you like to play? yes/no")
+    while answer==yes:
+            diamondtreasuregame(x,y,z,name)
+            answer=raw_input("Would you like to play again? yes/no")
+    print "Thanks for playing!"
+    return
+ 
+RandomOrUserGenerated(creation_of_board)
+RandomlyPlacedNegOne(matrix)
+board_moves(matrix)
