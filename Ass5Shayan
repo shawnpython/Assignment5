@@ -87,8 +87,12 @@ def board_moves(matrix):
         while user_move not in user_range:
                 user_move = raw_input("please enter a valid letter: ")
                
-        if user_move == r:
+                    
+        if user_move == "r":
                 row_move = raw_input("select a row to travel: ")
+                x=int(row_move)              
+                while x not in range(dim):
+                    row_move = raw_input("please enter a valid row: ")
                 x=int(row_move)
                 for y in range(dim):
                         diamondcollection(x,y)
@@ -96,9 +100,14 @@ def board_moves(matrix):
                 print matrix
                        
                 rowlocation=matrix[row_move]
+              
                
-        if user_move == c:
+                 if user_move == "c":
                 column_move = raw_input("select a column to travel: ")
+                x=int(column_move)              
+                while x not in range(dim):
+                    column_move = raw_input("please enter a valid column: ")
+                x=int(column_move)
         return
  
 def play_again(answer):
