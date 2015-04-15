@@ -19,7 +19,7 @@ def RandomOrUserGenerated(creation_of_board):
         if creation_of_board=="r":
                 maxdiam=raw_input("please type a number between 1 and 10, which represent the # of diamonds within the matrix")
                 maxdiam=int(maxdiam)
-                the_matrix_board(dim,maxdiam)
+                matrix_elements(dim,maxdiam)
                
         elif creation_of_board=="u":
                 list_of_lists=input("Provide a list of lists, same number of rows and columns wth integer numbers between 0 and 10 inclusive and maybe -1 ")
@@ -31,7 +31,7 @@ def RandomOrUserGenerated(creation_of_board):
                         print "Row",i,
                         for j in range(dim):
                                 print "  ",list_of_lists[i][j]," ",
-                        print ;\
+                        print 
                
                 return
  
@@ -44,7 +44,7 @@ def RandomlyPlacedNegOne(matrix):
                 matrix[x][y] = -1
         return
  
-def the_matrix_board(dim,maxdiam):
+def matrix_elements(dim,maxdiam):
     print "The board is"
     print "------------"
     #Putting random generated values into the matrix
@@ -53,6 +53,8 @@ def the_matrix_board(dim,maxdiam):
         for c in range(dim):
             row.append(random.randint(0,maxdiam))
         matrix.append(row)
+    return 
+def displaying_matrix(matrix):
     #Displaying the matrix
     print "   ",
     for i in range(dim):
@@ -62,8 +64,8 @@ def the_matrix_board(dim,maxdiam):
         print "Row",i,
         for j in range(dim):
                 print "  ",matrix[i][j]," ",
-        print ;\
-    return
+        print
+    return matrix
  
 def board_moves(matrix):
     count=0
@@ -135,5 +137,5 @@ def play_again(answer):
  
 RandomOrUserGenerated(creation_of_board)
 RandomlyPlacedNegOne(matrix)
+displaying_matrix(matrix)
 board_moves(matrix)
-
