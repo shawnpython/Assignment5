@@ -135,6 +135,7 @@ def play_again(answer):
     flag=True
     answer=""
     while flag==True:
+            inputs()
             diamond_treasure_game()
             answer=raw_input("Would you like to play again? yes/no")
             if answer=="no":
@@ -173,14 +174,19 @@ def diamond_treasure_game():
     '''board_moves(matrix)'''
     Lucky_Number(matrix)
 
+def inputs():
+    global creation_of_board
+    global dim
+    dim=raw_input("Choose a size for the board between 3 and 6, inclusive.")
+    dimNum = "3456"
+    while dim not in dimNum:
+        dim=raw_input("Please re-insert a value between 3 and 6 ")
+    creation_of_board=raw_input("Creation of board? (r-random,u-user) :")
+    dim=int(dim)
+    return creation_of_board,dim
+     
+
 #TOP LEVEL!
 intro()
-dim=raw_input("Choose a size for the board between 3 and 6, inclusive.")
-dimNum = "3456"
-while dim not in dimNum:
-        dim=raw_input("Please re-insert a value between 3 and 6 ")
-     
-creation_of_board=raw_input("Creation of board? (r-random,u-user) :")
-dim=int(dim)
 play_again(answer)
 
