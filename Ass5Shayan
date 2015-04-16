@@ -134,12 +134,16 @@ def board_moves(matrix):
 def play_again(answer):
     flag=True
     answer=""
+    number_of_hunters=1
     while flag==True:
             inputs()
+            number_of_hunters+=1
             diamond_treasure_game()
             answer=raw_input("Would you like to play again? yes/no")
+            
             if answer=="no":
                 flag=False
+    print
     print "Thanks for playing!"
     return
 
@@ -163,7 +167,6 @@ def Lucky_Number(matrix):
             position=str(matrix[q][p])
             conversion_binary=conversion_binary + position
         sum_of_conversion=sum_of_conversion+int(conversion_binary,2)
-        print sum_of_conversion
         
     print "Your lucky number is ", sum_of_conversion
     return matrix, sum_of_conversion
@@ -177,6 +180,9 @@ def diamond_treasure_game():
 def inputs():
     global creation_of_board
     global dim
+    global name
+    global number_of_hunters
+    name=raw_input("Good day hunter, what are thou name?")
     dim=raw_input("Choose a size for the board between 3 and 6, inclusive.")
     dimNum = "3456"
     while dim not in dimNum:
@@ -185,8 +191,24 @@ def inputs():
     dim=int(dim)
     return creation_of_board,dim
      
-
+def results():
+    #how many hunters played
+    #Sum of points from all hunters
+    #Name of hunter with the max points and the amount of points
+    print
+    print "The number of hunters were: ", number_of_hunters
+    print
+    print "The sum of all their points is: ", sum_of_points
+    print
+    print "The name of the hunter with the max number of points is: ", name_of_max_hunter," and got this many points: ", max_hunters_points
+    return
+    
 #TOP LEVEL!
+number_of_hunters=1
+sum_of_points=0
+name_of_max_hunter=""
+max_hunters_points=0
+
 intro()
 play_again(answer)
-
+results()
