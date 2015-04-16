@@ -20,6 +20,9 @@ def RandomOrUserGenerated(creation_of_board):
                 maxdiam=raw_input("please type a number between 1 and 10, which represent the # of diamonds within the matrix")
                 maxdiam=int(maxdiam)
                 matrix_elements(dim,maxdiam)
+                RandomlyPlacedNegOne(matrix)
+                
+                
                
         elif creation_of_board=="u":
                 list_of_lists=input("Provide a list of lists, same number of rows and columns wth integer numbers between 0 and 10 inclusive and maybe -1 ")
@@ -78,7 +81,7 @@ def board_moves(matrix):
     while user_move not in user_range:
         user_move = raw_input("please enter a valid letter: ")
         
-                    
+    #row         
     if user_move == "r":
         int_column_move = 0
         row_move = raw_input("select a row to travel: ")
@@ -88,7 +91,7 @@ def board_moves(matrix):
         int_row_move=int(row_move)
 
               
-               
+    #column  
     if user_move == "c":
         column_move = raw_input("select a column to travel: ")
         int_column_move=int(column_move)              
@@ -101,13 +104,14 @@ def board_moves(matrix):
         j = 0
         i = 0
         while j in range(dim):
-            while matrix[int_row_move][j] != -1 and j in range (dim):
-                if matrix[int_row_move][j]%2==0:
-                    count=count+(matrix[int_row_move][j])/2
-                    matrix[int_row_move][j]=(matrix[int_row_move][j])/2
-                else:
-                    count=count+matrix[int_row_move][j]
-                    matrix[int_row_move][j]=0
+            while matrix[int_row_move][j] != -1:
+                for j in range (dim):
+                    if matrix[int_row_move][j]%2==0:
+                        count=count+(matrix[int_row_move][j])/2
+                        matrix[int_row_move][j]=(matrix[int_row_move][j])/2
+                    else:
+                        count=count+matrix[int_row_move][j]
+                        matrix[int_row_move][j]=0
                 j = j+1
     if user_move == "c":
         while i in range(dim):
@@ -126,7 +130,6 @@ def board_moves(matrix):
                     
     return
     
-    
 def play_again(answer):
     answer=raw_input("Would you like to play? yes/no")
     while answer==yes:
@@ -134,8 +137,34 @@ def play_again(answer):
             answer=raw_input("Would you like to play again? yes/no")
     print "Thanks for playing!"
     return
- 
+
+def Lucky_Number(matrix):
+    global conversion_binary
+    #changing matrix to 1's and 0's
+    for i in range(dim):
+        for j in range(dim):
+            if matrix[i][j]%2!=0:
+                matrix[i][j]=1
+            elif matrix[i][j]==-1:
+                matrix[i][j]=1
+            else:
+                matrix[i][j]=0
+    #base10 calculations
+    conversion_binary=""
+    sum_of_conversion=0
+    for q in range(dim):  
+        conversion_binary=""
+        for p in range(dim):
+            position=str(matrix[q][p])
+            conversion_binary=conversion_binary + position
+        sum_of_conversion=sum_of_conversion+int(conversion_binary,2)
+        print sum_of_conversion
+        
+    print "Your lucky number is ", sum_of_conversion
+    return matrix, sum_of_conversion
+        
+
 RandomOrUserGenerated(creation_of_board)
-RandomlyPlacedNegOne(matrix)
 displaying_matrix(matrix)
-board_moves(matrix)
+Lucky_Number(matrix)
+'''board_moves(matrix)'''
