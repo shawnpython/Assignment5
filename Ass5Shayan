@@ -101,34 +101,57 @@ def board_moves(matrix):
         int_column_move=int(column_move)
 
     count = 0
-    if user_move == "r":
-        j = 0
-        i = 0
-        while j in range(dim):
-            while matrix[int_row_move][j] != -1:
-                for j in range (dim):
-                    if matrix[int_row_move][j]%2==0:
-                        count=count+(matrix[int_row_move][j])/2
-                        matrix[int_row_move][j]=(matrix[int_row_move][j])/2
-                    else:
-                        count=count+matrix[int_row_move][j]
-                        matrix[int_row_move][j]=0
-                j = j+1
+    if user_move == "r":       
+        for j in range(dim):
+            if matrix[int_row_move][j] == -1:
+                negative_one()
+            if matrix[int_row_move][j]%2==0:
+                count=count+((matrix[int_row_move][j])/2)
+                matrix[int_row_move][j]=(matrix[int_row_move][j])/2
+            else:
+                count=count+matrix[int_row_move][j]
+                matrix[int_row_move][j]=0
+                
     if user_move == "c":
-        while i in range(dim):
-            while matrix[i][int_column_move] != -1 and i in range (dim):
-                if matrix[i][int_column_move]%2==0:
-                    count=count+(matrix[i][int_column_move])/2
-                    matrix[i][int_column_move] = (matrix[i][int_column_move])/2
-                else:
-                    count = count + matrix[i][int_column_move]
-                    matrix[i][int_column_move]=0
-                i = i+1
+        for i in range(dim):
+            if matrix[i][int_column_move] == -1:
+                negative_one()
+            if matrix[i][int_column_move]%2==0:
+                count=count+((matrix[i][int_column_move])/2)
+                matrix[i][int_column_move] = ((matrix[i][int_column_move])/2)
+            else:
+                count = count + matrix[i][int_column_move]
+                matrix[i][int_column_move]=0
+
+    if user_move == "m":
+        for i in range(dim):
+            if matrix[i][i] == -1:
+                negative_one()
+            if matrix[i][i]%2== 0:
+                count = count+((matrix[i][i])/2)
+                matrix[i][i]=(matrix[i][i]/2)
+            else:
+                count=count+matrix[i][i]
+                matrix[i][i]=0
+                
     new_count = 0 + count
     print "You just collected ", count, "diamonds"
     print "Your diamond total is", new_count, "diamonds"
-
+    print " \n the new board is: \n"
+    displaying_matrix(matrix)
+    another_move=raw_input("would you like to make another move?y/n: ")
+    another_move_range = "yn"
+    while another_move not in another_move_range:
+        another_move=raw_input("Please select y for yes and n for no: ")
+    if another_move == "y":
+        board_moves(matrix)
+    
                     
+    return
+
+def negative_one():
+    print "uh oh you fell in a trap! Game over"
+    play_again(answer)
     return
     
 def play_again(answer):
@@ -210,5 +233,9 @@ name_of_max_hunter=""
 max_hunters_points=0
 
 intro()
+inputs()
+RandomOrUserGenerated(creation_of_board)
+displaying_matrix(matrix)
+board_moves(matrix)
 play_again(answer)
 results()
