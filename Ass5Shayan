@@ -1,16 +1,17 @@
+##Assignment 5: Diamond Treasure Game
+##Group Members: Shayan Noruzi, Daniela Di Francesco, Peyton Lupul
+##Time contributed by each member: 33.3% each (equal distribution)
+##Time spent on assignment: 20+hours
+##Cmpt 120 - Diana Cukierman Spring 2015
+
 import random
 matrix=[]
-print "testing github"
+answer=""
+
+
 #Validation of dim
  
-dim=raw_input("Choose a size for the board between 3 and 6, inclusive.")
-dimNum = "3456"
-while dim not in dimNum:
-        dim=raw_input("Please re-insert a value between 3 and 6 ")
- 
-creation_of_board=raw_input("Creation of board? (r-random,u-user) :")
-dim=int(dim)
- 
+
 def intro():
     print "Welcome to my Diamond Treasure Hunter game! Hope you get lots of treasure!"
     return
@@ -131,10 +132,13 @@ def board_moves(matrix):
     return
     
 def play_again(answer):
-    answer=raw_input("Would you like to play? yes/no")
-    while answer==yes:
-            diamondtreasuregame(x,y,z,name)
+    flag=True
+    answer=""
+    while flag==True:
+            diamond_treasure_game()
             answer=raw_input("Would you like to play again? yes/no")
+            if answer=="no":
+                flag=False
     print "Thanks for playing!"
     return
 
@@ -163,8 +167,20 @@ def Lucky_Number(matrix):
     print "Your lucky number is ", sum_of_conversion
     return matrix, sum_of_conversion
         
+def diamond_treasure_game():
+    RandomOrUserGenerated(creation_of_board)
+    displaying_matrix(matrix)
+    '''board_moves(matrix)'''
+    Lucky_Number(matrix)
 
-RandomOrUserGenerated(creation_of_board)
-displaying_matrix(matrix)
-Lucky_Number(matrix)
-'''board_moves(matrix)'''
+#TOP LEVEL!
+intro()
+dim=raw_input("Choose a size for the board between 3 and 6, inclusive.")
+dimNum = "3456"
+while dim not in dimNum:
+        dim=raw_input("Please re-insert a value between 3 and 6 ")
+     
+creation_of_board=raw_input("Creation of board? (r-random,u-user) :")
+dim=int(dim)
+play_again(answer)
+
